@@ -17,3 +17,19 @@ the default prefix is '$' use it to call the bot.
 - **$refresh** adds all the users in the player list to the current game.
 - **$reset** reset the game to the initial state (but keeps the main deck)
 - **$exit** use this command to close the game instance (please use it).
+
+### deck format
+If you want to add new decks or expansions there are a few simple rules to follow:
+- new line for every card
+- first all the black cards
+- a line only with '@@' as a separator
+- all the white cards following
+
+## TODO
+- [x] make a playable bot.
+- [x] multi-server ready.
+- [ ] expansion.
+- [ ] read deck from file.
+- [ ] only the admin should use certain commands.
+- [ ] select the number of points needed to win the game.
+- [ ] new decks
