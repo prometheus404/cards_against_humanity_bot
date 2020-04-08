@@ -5,6 +5,9 @@ If you haven't already you should consider buyng the real game from https://card
 You can check the official rules here: https://cardsagainsthumanity.com
 
 ## how to use the bot
+### add the bot
+follow this link and add the bot to your server
+https://discordapp.com/api/oauth2/authorize?client_id=694987121995415692&permissions=67584&scope=bot
 ### commands
 the default prefix is '$' use it to call the bot.
 - **$new** use this command to start a new game instance.
