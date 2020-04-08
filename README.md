@@ -1,11 +1,11 @@
-#unofficial cards_against_humanity_bot
+# unofficial cards_against_humanity_bot
 Cards Against Humanity is a party game for horrible people and now there's a bot for that.
 If you haven't already you should consider buyng the real game from https://cardsagainsthumanity.com
-##rules
+## rules
 You can check the official rules here: https://cardsagainsthumanity.com
 
-##how to use the bot
-###commands
+## how to use the bot
+### commands
 the default prefix is '$' use it to call the bot.
 -**$new** use this command to start a new game instance.
 -**$join** adds the user who entered the command to the players list (but not in the game: see $start and $refresh).
