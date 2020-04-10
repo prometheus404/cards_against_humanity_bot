@@ -43,7 +43,7 @@ class Game:
 			whiteCards.append(x)
 			x = file.readline()
 		self.deck = Deck(whiteCards, blackCards)
-        
+
 	def add_deck(self, secondDeckFile):
 		whiteCards=[]
 		blackCards=[]
@@ -57,20 +57,20 @@ class Game:
 			whiteCards.append(x)
 			x = file.readline()
 		self.deck.add_cards(whiteCards, blackCards)
-        
+
 	def draw_black(self):
 		self.blackCardPlayerd = self.deck.draw_black()
 		self.expectedCards = self.blackCardPlayerd.count('_')
 		if self.expectedCards == 0:
 			self.expectedCards = 1
 		return self.blackCardPlayerd
-    
+
 	def create_player(self, id):
 		whiteCards = [self.deck.draw_white()]
 		for i in range(1, self.handSize):
 			whiteCards.append(self.deck.draw_white())
 		self.players.append(Player(id,whiteCards))
-    
+
 	def shuffle_deck(self):
 		self.deck.shuffle()
 
@@ -79,10 +79,10 @@ class Game:
 			print(i)
 			self.create_player(i)
 		np.random.shuffle(self.players)
-            
+
 	def next_czar(self):
 		self.cardCzar = (self.cardCzar + 1) % len(self.players)
-    
+
 	def plays(self, playerId, card):	#obsoleta
 		if playerId == self.players[self.cardCzar].id:
 			return False
@@ -108,16 +108,16 @@ class Game:
 			if i.id == playerId:
 				print(i.id)
 				result = []
-				delta = 0 	
+				delta = 0
 				for j in cards:
 					result.append(i.cards[int(j)])	#sostituisce ogni istanza di cards con la stringa corrispondente
 				self.cardsPlayed.append([playerId, ''.join(['~'+x for x in result])])
-				
+
 				for j in result:
 					i.play(j)
 					i.draw(self.deck.draw_white())
 		return True
-				
+
 
 	def randomize(self):
 		np.random.shuffle(self.cardsPlayed)
@@ -127,7 +127,7 @@ class Game:
 			if i.id == self.cardsPlayed[cardIndex][0]:
 				i.score += 1
 		self.cardsPlayed = []   #clear cards played
-        
+
 	def reached_max_score(self):
 		if not self.players:
 			return None
@@ -236,6 +236,15 @@ async def set_deck(ctx, deckName):
 		game.deck = deckName
 		await ctx.send('done')
 
+@client.command(name=score)
+async def set_score(ctx, score):
+	if ctx.guild.id not in instances:
+		await ctx.send('first create a game with !new')
+		return
+	game = instances[ctx.guild.id].game
+	if score > 0:
+		game.score = score
+		await ctx.send('done')
 
 @client.command(name='start')
 async def start(ctx):
@@ -264,7 +273,7 @@ async def start(ctx):
 	print(players)
 	players.clear()
 	print(game.players)
-	await turn(ctx, game)	
+	await turn(ctx, game)
 
 async def turn(ctx, game):
 	if ctx.guild.id not in instances:
@@ -296,7 +305,7 @@ async def play_card(ctx, *cards):
 		if i.id == ctx.author:
 			if not game.plays_cards(i.id, cards):	#collateral effect to play cards
 				await ctx.send("you can't play cards until the end of this turn")
-			
+
 	if len(game.cardsPlayed) >= len(game.players) - 1:
 		game.randomize()
 		game.expectedCards = False
@@ -314,7 +323,7 @@ async def join(ctx):
 		players.append(ctx.author)
 		print(players)
 		await ctx.send(format_player_list(players))
-		
+
 @client.command(name='refresh')
 async def refresh_players(ctx):
 	if ctx.guild.id not in instances:
