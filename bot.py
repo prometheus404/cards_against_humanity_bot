@@ -233,10 +233,10 @@ async def set_deck(ctx, deckName):
 		return
 	game = instances[ctx.guild.id].game
 	if deckName:
-		game.deck = deckName
+		game.fileName = deckName
 		await ctx.send('done')
 
-@client.command(name=score)
+@client.command(name="score")
 async def set_score(ctx, score):
 	if ctx.guild.id not in instances:
 		await ctx.send('first create a game with !new')
